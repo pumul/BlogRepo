@@ -1,0 +1,87 @@
+{% extends "app1/base.html" %}
+
+{% block content %}
+   
+    <div class="container" style="margin-top:20px;">
+        <div class="container" style="margin-bottom: 30px;">
+            <div class="row">
+                <div class="offset-3 col-md-6">
+                    <div class="container shadow p-3" style="border:1px dashed #002966;padding-bottom:40px;border-top:2px solid #002966;">
+                    <form method="post" action="{% url 'dashboard' %}">
+                        {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Title :</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="title" class="form-control" placeholder="Post Title">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-md-6">
+                            <label>Image Url :</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="image_url" class="form-control" placeholder="Image Url">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-md-6">
+                            <label>Description :</label>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea name="desc" class="form-control"  placeholder="Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" type="submit" style="float: right;">Post</button>
+                        </div>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {% if post_data %}
+        <div class="container">
+        {% for data in post_data %}
+        <div class="shadow p-3" style="font-family:vardana;border:1px solid #002966;margin-top: 20px;">
+            <div class="row">
+                <div class="col-md-10">
+                    <h3 style="color:#ffcc00;text-decoration: underline;">{{ data.title }}</h3>
+                </div>
+                <div class="col-md-2">
+                	<a class="btn btn-warning" href="{% url 'update_post' data.id %}">edit</a>
+                	<a class="btn btn-danger" href="{% url 'delete_post' data.id %}">delete</a>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px;">
+            	<div class="col-md-12">
+            		<small style="color:#ffbf80">
+                        <b>Author :</b> {{ data.author.first_name }} {{ data.author.last_name }}</small>
+            	</div>
+            </div>
+            <div class="row" style="margin-top: 20px;">
+            	<div class="col-md-12">
+            		<center>
+            		<img src="{{ data.image_url }}" style="border: 1px solid white;background-color: white" height="300px;" width="700px;">
+            		</center>
+            	</div>
+            </div>
+            <div class="row" style="margin-top: 20px;">
+            	<div class="col-md-12">
+            		<b style="color: white;font-size: 20px;text-decoration: underline;">Description :</b>
+            		<p style="color:white;">{{ data.desc }}</p>
+            	</div>
+            </div>
+        </div>  
+        {% endfor %}
+        </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

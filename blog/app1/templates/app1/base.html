@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'app1/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'app1/css/style.css' %}">
+</head>
+<style>
+  .cls1 {
+  color:white;
+  text-decoration:none;
+  border-bottom:2px solid #002966;
+  padding-bottom:10px;
+  font-family: vardana;
+  font-size:18px;
+  }
+  a.cls1:hover {
+    color:#002966;
+    border-bottom:2px solid white;
+    padding-bottom:10px;
+    font-family: vardana;
+    font-size:18px;
+  }
+<!--  #id_username{-->
+<!--  background:none;-->
+<!--  border:1px solid blue;-->
+<!--  border-radius:10px;-->
+<!--  background-color:rgb(75,74,74);-->
+<!--  }-->
+<!--  #id_username:hover{-->
+<!--  border:1px solid blue;-->
+<!--  border-radius:10px;-->
+<!--  }-->
+</style>
+<body>
+
+<div class="container-fluid">
+   {% include "app1/navbar.html" %}
+
+  {% if messages %}
+    {% for msg in messages %}
+      <p {% if msg.tags %} class="alert alert-{{ msg.tags }} p-1" {% endif %} style="text-align:center;margin-top:20px;">{{ msg }}</p>
+    {% endfor %}
+  {% endif %}
+<div class="container">
+  {% block content %}
+
+  {% endblock %}
+</div>
+
+</div>
+
+
+
+
+
+
+<script src="{% static 'app1/js/bootstrap.js' %}"></script>
+<script src="{% static 'app1/js/popper.js' %}"></script>
+<script src="{% static 'app1/js/jquery.js' %}"></script>
+</body>
+</html>
